@@ -2,7 +2,7 @@
 
 ## ✨ What I Just Built For You
 
-A **modern AI-powered email classification system** that automatically sorts emails into 4 smart folders using Groq's LLaMA AI.
+A **modern AI-powered email classification system** that automatically sorts emails into 4 smart folders using Groq's LLaMA 3.3 70B AI.
 
 ---
 

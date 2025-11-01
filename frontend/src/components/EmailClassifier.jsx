@@ -33,14 +33,21 @@ function EmailClassifier() {
     setClassificationResult(null)
 
     try {
+      // Check if API key exists
+      const apiKey = import.meta.env.VITE_GROQ_API_KEY
+      
+      if (!apiKey || apiKey === 'your_groq_api_key_here') {
+        throw new Error('Missing API key. Please create a .env file with VITE_GROQ_API_KEY')
+      }
+
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`
+          'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: 'llama-3.1-70b-versatile',
+          model: 'llama-3.3-70b-versatile',
           messages: [
             {
               role: 'system',
@@ -65,7 +72,9 @@ REASON: Brief explanation`
       })
 
       if (!response.ok) {
-        throw new Error(`API Error: ${response.status}`)
+        const errorData = await response.json().catch(() => ({}))
+        const errorMessage = errorData.error?.message || errorData.message || `API returned ${response.status}`
+        throw new Error(`API Error (${response.status}): ${errorMessage}`)
       }
 
       const data = await response.json()

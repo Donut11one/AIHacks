@@ -102,7 +102,7 @@ The app will open at `http://localhost:3000`
 
 ## 🤖 AI Classification
 
-The system uses Groq's LLaMA 3.1 70B model with:
+The system uses Groq's LLaMA 3.3 70B model with:
 - **Temperature**: 0.3 (for consistent, focused responses)
 - **Max Tokens**: 150
 - **Custom Prompt**: Trained to categorize based on business context
